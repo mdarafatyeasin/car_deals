@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<h1 class="text-center mt-3">User Profile</h1>
+<div class="profileCard d-flex align-center justify-content-center">
+  <div class="context text-center">
+    <img src="{% static "user_img.png" %}" class="card-img-top"
+    style="width:200px;" alt="profile picture">
+    <div class="card-body">
+      <h5 class="card-title">{{data}}</h5>
+      <p class="card-text">
+        Some quick example text to build on the card title and make up the bulk
+        of the card's content.
+      </p>
+      <a href="{% url "edit_profile" %}" class="btn btn-primary">Edit Profile</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
