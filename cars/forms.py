@@ -1,7 +1,7 @@
 from django import forms
 from . import models
 
-class addCar (forms.ModelForm):
+class AddCarForm (forms.ModelForm):
     class Meta:
         model = models.car
         fields = "__all__"
