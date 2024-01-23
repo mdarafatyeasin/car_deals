@@ -3,6 +3,8 @@ from .forms import registration_form, edit_user_data
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from shop.models import shop_model
+from cars.models import car
 
 # Create your views here.
 # registration
@@ -44,9 +46,13 @@ def Logout(request):
         
 # profile
 def Profile (request):
-    # print(request.user)
     data = request.user
-    return render(request, 'profile.html', {'data':data})
+    products = shop_model.objects.filter(author_name = request.user)
+    product_details = []
+    for product in products:
+        product_detail = car.objects.get(id = product.product_id)
+        product_details.append(product_detail)
+    return render(request, 'profile.html', {'data':data, "products":product_details})
 
 # edit profile
 def editProfile(request):
@@ -72,4 +78,3 @@ def changePassword (request):
     else:
         pass_change_form = PasswordChangeForm(user=request.user)
     return render(request, "change_password.html", {"form":pass_change_form})
-    

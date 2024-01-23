@@ -1,4 +1,34 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>This is the home page</h1>
+{% extends 'base.html' %} {% block content %} {% load static %}
+<div class="m-auto text-center">
+    <!-- filter section -->
+    {% for brand in brands %}
+    <input type="radio" class="btn-check" name="options-base" id="{{brand.brand_name}}" autocomplete="off">
+    <label class="btn btn-secondary" for="{{brand.brand_name}}"><a class ="text-white text-decoration-none" href ="{% url 'brand_wise_car' brand.slug%}">{{brand.brand_name}}</a></label>
+    {% endfor %}
+</div>
+<div class="home-section d-flex justify-content-center">
+  <!-- car section -->
+  <div class="d-flex flex-wrap justify-content-center w-75 px-3 m-auto">
+    {% if data|length == 0 %}
+    <img class="w-50" src="{% static 'no_data.jpg' %}" alt="No data found" />
+    {% endif %} {% for cars in data %}
+    <div class="col-sm-4 p-2 mb-3 mb-sm-0">
+      <div class="card">
+        <img
+          style="width: 200px"
+          src="{{cars.picture.url}}"
+          class="card-img-top m-auto p-2"
+          alt="card img"
+        />
+        <div class="card-body">
+          <h1>{{cars.id}}</h1>
+          <h5 class="card-title"><a href="{% url "car_detail" cars.id %}">{{cars.name}}</a></h5>
+          <h6 class="fw-light">Brand: {{cars.brand_name}}</h6>
+          <p class="card-text">{{cars.description | truncatewords:10}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor%}
+  </div>
+</div>
 {% endblock %}

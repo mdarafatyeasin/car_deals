@@ -8,7 +8,7 @@ class car(models.Model):
     description = models.TextField()
     price = models.CharField(max_length = 10)
     quantity = models.CharField(max_length = 10)
-    picture = models.ImageField(upload_to="cars/media/upload", null=True, blank=True)
+    picture = models.ImageField(upload_to="cars/upload", null=True, blank=True)
 
     def __str__(self):
         return self.name

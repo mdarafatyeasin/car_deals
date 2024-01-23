@@ -26,6 +26,8 @@ urlpatterns = [
     path('author/', include('author.urls')),
     path('brands/', include('brands.urls')),
     path('cars/', include('cars.urls')),
+    path('shop/', include('shop.urls')),
+    path('filter/<slug:brand_slug>/', home, name='brand_wise_car'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
