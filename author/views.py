@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, Se
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from shop.models import shop_model
 from cars.models import car
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # registration
@@ -39,12 +40,14 @@ def UserLogin (request):
     return render(request, 'login.html', {'form':login_form})
 
 # logout
+@login_required
 def Logout(request):
    logout(request) 
    messages.warning(request, "Please login again")
    return redirect('home_page')
         
 # profile
+@login_required
 def Profile (request):
     data = request.user
     products = shop_model.objects.filter(author_name = request.user)
@@ -55,6 +58,7 @@ def Profile (request):
     return render(request, 'profile.html', {'data':data, "products":product_details})
 
 # edit profile
+@login_required
 def editProfile(request):
     if request.method == "POST":
         edit_user = edit_user_data(request.POST, instance = request.user)
@@ -67,6 +71,7 @@ def editProfile(request):
     return render(request, 'edit_profile.html', {"form":edit_user})
 
 # change password
+@login_required
 def changePassword (request):
     if request.method == "POST":
         pass_change_form = PasswordChangeForm(user=request.user, data = request.POST)

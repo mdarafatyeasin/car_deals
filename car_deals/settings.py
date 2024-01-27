@@ -133,6 +133,8 @@ STATICFILES_DIRS = [
 # Base url to serve media files
 MEDIA_URL = '/media/'
 
+LOGIN_URL = '/author/login'
+
 # Path where media is stored'
 # MEDIA_ROOT = BASE_DIR / 'media'
 

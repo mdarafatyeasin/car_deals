@@ -1,10 +1,25 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
-<div class="m-auto text-center">
+
+{% comment %} wellcome page {% endcomment %}
+<div class="banner_section">
+  <div class="w-75 m-auto content_section">
+    <div class="content">
+      <h1>Lets live your Dreem</h1>
+      <p>Let's have a ride on your own car.</p>
+      <button class="button-85" role="button">Bye Now</button>
+    </div>
+    <div class="img">
+      <img src="{% static "banner_car.png" %}" alt="">
+    </div>
+  </div>
+</div>
+<div class="m-auto text-center p-5">
     <!-- filter section -->
     {% for brand in brands %}
     <input type="radio" class="btn-check" name="options-base" id="{{brand.brand_name}}" autocomplete="off">
     <label class="btn btn-secondary" for="{{brand.brand_name}}"><a class ="text-white text-decoration-none" href ="{% url 'brand_wise_car' brand.slug%}">{{brand.brand_name}}</a></label>
     {% endfor %}
+    <h3>{{data|length}} car found</h3>
 </div>
 <div class="home-section d-flex justify-content-center">
   <!-- car section -->
